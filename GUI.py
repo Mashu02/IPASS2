@@ -38,7 +38,7 @@ def main_menu_loop():
     while True:
         #scherm kleur
         screen.fill((240,255,255))
-        algo.draw_text('Pick color(s)', pygame.font.SysFont(None, 50), c.black, screen, 275, 35)
+        algo.draw_text('Pick up to 4 colors', pygame.font.SysFont(None, 50), c.black, screen, 240, 35)
         algo.draw_text('Selected colors', pygame.font.SysFont(None, 50), c.black, screen, 695, 35)
         algo.draw_text('Your liked combinations:', pygame.font.SysFont(None, 50), c.black, screen, 1065, 35)
         y_pos = 92
@@ -248,7 +248,7 @@ def main_menu_loop():
 
         #feedback
         elif button_feedback.collidepoint((mouse)):
-            if click and len(clicked_button_list) != 0:
+            if click and len(clicked_button_list) != 0 and len(clicked_button_list) <= 4:
                 input_hsv = algo.list_to_color_hsv(clicked_button.values())
                 # van klein naar groot sorteren voor berekenen v1,v2 en v1,v3
                 sorted(input_hsv, key=lambda x: x[0])
@@ -666,7 +666,8 @@ def generate():
         algo.draw_text('Generate again', pygame.font.SysFont(None, 27), c.black, screen, 55, y_pos + 65)
         algo.draw_text('Save', pygame.font.SysFont(None, 35), c.black, screen, 95, y_pos + 185)
         algo.draw_text('Harmony', pygame.font.SysFont(None, 35), c.black, screen, 70, y_pos + 310)
-
+        algo.draw_text('For harmony 3 selected', pygame.font.SysFont(None, 25), c.black, screen, 25, y_pos + 400)
+        algo.draw_text('colors is the maximum', pygame.font.SysFont(None, 25), c.black, screen, 25, y_pos + 420)
         #plaats de pngs, kijk dc voor hoe eruit zien
         horizontal = pygame.image.load('horizontal.png')
         horizontal1 = pygame.transform.scale(horizontal, (300,300))
@@ -735,7 +736,7 @@ def harmony():
         mouse = pygame.mouse.get_pos()
         click = False
         screen.fill((240, 255, 255))
-        algo.draw_text('Harmony', pygame.font.SysFont(None, 30), c.black, screen, 835, 5)
+        algo.draw_text('Harmony in HSB', pygame.font.SysFont(None, 30), c.black, screen, 810, 5)
 
         input_hsv = algo.list_to_color_hsv(clicked_button.values())
         for event in pygame.event.get():
@@ -790,12 +791,18 @@ def harmony():
         pygame.draw.rect(screen, c.black, button_tetradic_outline)
         pygame.draw.rect(screen, (211, 211, 211), button_tetradic)
 
-        algo.draw_text('Complementary', pygame.font.SysFont(None, 25), c.black, screen, 50, 100)
-        algo.draw_text('Monochromatic', pygame.font.SysFont(None, 25), c.black, screen, 50, 225)
-        algo.draw_text('Analogous', pygame.font.SysFont(None, 25), c.black, screen, 50, 350)
-        algo.draw_text('Split complementary', pygame.font.SysFont(None, 23), c.black, screen, 50, 475)
-        algo.draw_text('Triadic', pygame.font.SysFont(None, 25), c.black, screen, 50, 600)
-        algo.draw_text('Tetradic', pygame.font.SysFont(None, 25), c.black, screen, 50, 725)
+        algo.draw_text('Complementary', pygame.font.SysFont(None, 25), c.black, screen, 60, 130)
+        algo.draw_text('3 max', pygame.font.SysFont(None, 25), c.black, screen, 100, 100)
+        algo.draw_text('Monochromatic', pygame.font.SysFont(None, 25), c.black, screen, 60, 255)
+        algo.draw_text('1 max', pygame.font.SysFont(None, 25), c.black, screen, 100, 225)
+        algo.draw_text('Analogous', pygame.font.SysFont(None, 25), c.black, screen, 75, 375)
+        algo.draw_text('2 max', pygame.font.SysFont(None, 25), c.black, screen, 100, 350)
+        algo.draw_text('Split complementary', pygame.font.SysFont(None, 23), c.black, screen, 50, 500)
+        algo.draw_text('1 max', pygame.font.SysFont(None, 25), c.black, screen, 100, 475)
+        algo.draw_text('Triadic', pygame.font.SysFont(None, 25), c.black, screen, 95, 625)
+        algo.draw_text('2 max', pygame.font.SysFont(None, 25), c.black, screen, 100, 600)
+        algo.draw_text('Tetradic', pygame.font.SysFont(None, 25), c.black, screen, 95, 750)
+        algo.draw_text('1 max', pygame.font.SysFont(None, 25), c.black, screen, 100, 725)
 
         algo.draw_text('Generate again', pygame.font.SysFont(None, 27), c.black, screen, 845, 755)
         algo.draw_text('Save', pygame.font.SysFont(None, 35), c.black, screen, 640, 760)
@@ -803,8 +810,6 @@ def harmony():
         for single_color in clicked_button_list:
             algo.draw_text("-" + single_color, pygame.font.SysFont(None, 35), c.black, screen, 50, y_pos)
             y_pos += 25
-
-
 
         horizontal = pygame.image.load('horizontal.png')
         horizontal1 = pygame.transform.scale(horizontal, (300,300))
