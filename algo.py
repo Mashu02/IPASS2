@@ -224,7 +224,7 @@ def calc_angle(lijst_van_hsv_values):
         counter += 1
     return lst
 
-#print(calc_angle([[0,100,100],[120,80,80],[240,80,80]]))
+#print(calc_angle([[0, 0.0, 0.0], [0, 0.0, 50.2], [0, 0.0, 75.3]]))
 
 def top_votes(input_GUI_list):
     lst = []
@@ -388,6 +388,7 @@ def get_higest_sim_in_hsv_feedback_2(angle, cosine_waarde):
     lst = whole_data_in_hsv()
     whole_data_angles = angle_whole_data(lst)
     data = data_clean(angle,whole_data_angles) #data is de angle
+    data2 = data_index_check(angle, lst)
     for combo in data:
         combos.append(combo[0] + combo[1])
 
@@ -397,6 +398,8 @@ def get_higest_sim_in_hsv_feedback_2(angle, cosine_waarde):
     #kijk welke key die sim score heeft
     keys = [k for k, v in dictionary.items() if v == cosine_waarde]
     lists = [list(x) for x in keys]
+
+
     lists_new = lists[0]
     length = len(lists_new)
     mid = length // 2
@@ -412,7 +415,8 @@ def get_higest_sim_in_hsv_feedback_2(angle, cosine_waarde):
     second_mid_pre = pre_return[mid_pre:]
     lst_1.append(first_mid_pre)
     lst_1.append(second_mid_pre)
-    return lst_1
+    index = data.index(lst_1)
+    return data2[index]
 
 #print(get_higest_sim_in_hsv_feedback_2([[0, 0.0, 50.2], [0, 0.0, 75.3]], 0.9924749053145441))
 
@@ -423,6 +427,7 @@ def get_higest_sim_in_hsv_feedback_3(angle, cosine_waarde):
     lst = whole_data_in_hsv()
     whole_data_angles = angle_whole_data(lst)
     data = data_clean(angle,whole_data_angles) #data is de angle
+    data2 = data_index_check(angle, lst)
     for combo in data:
         combos.append(combo[0] + combo[1] + combo[2])
 
@@ -450,7 +455,8 @@ def get_higest_sim_in_hsv_feedback_3(angle, cosine_waarde):
     lst_1.append(first_mid_pre)
     lst_1.append(second_mid_pre)
     lst_1.append(third_mid_pre)
-    return lst_1
+    index = data.index(lst_1)
+    return data2[index]
 
 #print(get_higest_sim_in_hsv_feedback_3([[0, 0.0, 50.2], [0, 0.0, 75.3], [0, 0.0, 100.0]], 0.9135732015921233))
 
